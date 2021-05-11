@@ -4,7 +4,6 @@ import nl.openvalue.cryptorates.coinmarketcap.CoinMarketCapClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class CryptoCurrencyService {
 
     public void update() {
         var listings = restClient.listingsLatest(1, 500, "EUR").data;
+        clear();
         CryptoCurrency.persist(listings);
     }
 
